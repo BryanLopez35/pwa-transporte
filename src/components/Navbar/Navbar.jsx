@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import BurgerButton from "./BurgerButton";
 import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
 
 function Navbar() {
   const [clicked, setClicked] = React.useState(false);
@@ -58,8 +59,9 @@ function Navbar() {
           <Link to="/galeria">Galería</Link>
           <Link to="/acerca">Sobre Nosotros</Link>
           {isReadyForInstall && (
-            <button onClick={downloadApp}> Descargar </button>
+            <Button  variant="contained" onClick={downloadApp}> Descargar </Button>
           )}
+         
         </div>
         <div className="burger">
           <BurgerButton clicked={clicked} handleClick={handleClick} />
