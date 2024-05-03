@@ -47,9 +47,12 @@ function Navbar() {
   return (
     <>
       <NavContainer className={`links ${clicked ? "active" : ""}`}>
-        <h2>
-          Muévete por <span>Tijuana</span>
-        </h2>
+        <Link to="/">
+          {" "}
+          <h2>
+            Muévete por <span>Tijuana</span>
+          </h2>
+        </Link>
         <div className={`links ${clicked ? "active" : ""}`}>
           <Link to="/">Inicio</Link>
           <Link to="/galeria">Galería</Link>
