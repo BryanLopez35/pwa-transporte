@@ -20,6 +20,7 @@
     "react-scripts": "5.0.1",
     "serve": "^14.2.3",
     "styled-components": "^6.1.9",
+    "swiper": "^11.1.1",
     "web-vitals": "^2.1.4",
     "workbox-core": "^7.1.0",
     "workbox-expiration": "^7.1.0",
