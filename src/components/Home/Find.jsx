@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Typography, TextField, Button, Grid } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
 
 export default function Find() {
   return (
@@ -7,7 +8,7 @@ export default function Find() {
       {/* Contenedor de la sección del formulario */}
       <div
         style={{
-          minHeight: "95vh", // Ajusta la altura vertical del contenedor principal
+          minHeight: "91vh", // Ajusta la altura vertical del contenedor principal
           position: "relative", // Asegura que la superposición esté dentro del contenedor
           overflow: "hidden", // Evita que la superposición sobresalga del contenedor
           background: `url("https://cdn-3.expansion.mx/dims4/default/82048d0/2147483647/strip/true/crop/2107x1423+0+0/resize/1200x810!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F34%2F11ce48a3419c8f0f7f8ccc772ef0%2Fistock-880471902.jpg")`,
@@ -17,7 +18,7 @@ export default function Find() {
           alignItems: "center",
           justifyContent: "center",
           width: "100%",
-          zIndex: -1,
+          zIndex: 0,
         }}
       >
         {/* Superposición para oscurecer la imagen */}
@@ -39,7 +40,7 @@ export default function Find() {
             variant="h3"
             component="h1"
             gutterBottom
-            style={{ color: "#fff" }}
+            style={{ color: "#fff", zIndex: 1 }}
           >
             Explora tu ciudad, Muévete por{" "}
             <span style={{ fontWeight: "bold" }}>Tijuana</span>
@@ -48,7 +49,7 @@ export default function Find() {
             style={{
               background: "rgba(255, 255, 255, 255)", // Fondo blanco semi-transparente
               borderRadius: "13px",
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
               padding: "30px",
               width: "100%", // Asegura que el ancho sea del 100% para dispositivos pequeños
               maxWidth: "800px", // Limita el ancho máximo para pantallas más grandes
@@ -74,6 +75,15 @@ export default function Find() {
                     label="Origen"
                     name="origin"
                     autoFocus
+                    sx={{
+                      borderColor: "#ec8090",
+                    }}
+                    placeholder="Ingresa el punto de inicio"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start"></InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -85,6 +95,12 @@ export default function Find() {
                     id="destination"
                     label="Destino"
                     name="destination"
+                    placeholder="Ingresa tu destino"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start"></InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -92,7 +108,16 @@ export default function Find() {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    color="primary"
+                    sx={{
+                      background: "#e0536c",
+                      "&:hover": {
+                        backgroundColor: "#cc3255",
+                      },
+                      "&:active": {
+                        backgroundColor: "#9f2241",
+                      },
+                    }}
+                    onClick={() => alert("Botón presionado")}
                   >
                     Encontrar Rutas
                   </Button>
