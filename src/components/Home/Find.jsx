@@ -10,13 +10,14 @@ export default function Find() {
           minHeight: "95vh", // Ajusta la altura vertical del contenedor principal
           position: "relative", // Asegura que la superposición esté dentro del contenedor
           overflow: "hidden", // Evita que la superposición sobresalga del contenedor
+          background: `url("https://cdn-3.expansion.mx/dims4/default/82048d0/2147483647/strip/true/crop/2107x1423+0+0/resize/1200x810!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F34%2F11ce48a3419c8f0f7f8ccc772ef0%2Fistock-880471902.jpg")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           width: "100%",
-          backgroundImage: `url("https://cdn-3.expansion.mx/dims4/default/82048d0/2147483647/strip/true/crop/2107x1423+0+0/resize/1200x810!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F34%2F11ce48a3419c8f0f7f8ccc772ef0%2Fistock-880471902.jpg")`, // Imagen de fondo
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          zIndex: -1,
         }}
       >
         {/* Superposición para oscurecer la imagen */}
@@ -27,20 +28,26 @@ export default function Find() {
             left: 0,
             width: "100%",
             height: "100%",
-            background: "rgba(0, 0, 0, 0.6)", // Color oscuro con opacidad ajustada
+            backgroundColor: "rgba(0, 0, 0, 0.6)", // Color oscuro con opacidad
             zIndex: -1, // Asegura que esté detrás de los elementos del formulario
           }}
         />
 
         {/* Contenido del formulario */}
         <Container component="main" maxWidth="md">
-          <Typography variant="h3" component="h1" gutterBottom style={{ color: "#fff" }}>
-            Explora tu ciudad, Muévete por <span style={{ fontWeight: "bold" }}>Tijuana</span>
+          <Typography
+            variant="h3"
+            component="h1"
+            gutterBottom
+            style={{ color: "#fff" }}
+          >
+            Explora tu ciudad, Muévete por{" "}
+            <span style={{ fontWeight: "bold" }}>Tijuana</span>
           </Typography>
           <div
             style={{
               background: "rgba(255, 255, 255, 255)", // Fondo blanco semi-transparente
-              borderRadius: "25px",
+              borderRadius: "13px",
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
               padding: "30px",
               width: "100%", // Asegura que el ancho sea del 100% para dispositivos pequeños
@@ -86,7 +93,6 @@ export default function Find() {
                     fullWidth
                     variant="contained"
                     color="primary"
-                    style={{ marginTop: "16px" }} // Ajusta el margen superior del botón
                   >
                     Encontrar Rutas
                   </Button>
