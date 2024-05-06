@@ -8,7 +8,7 @@ export default function TransportationOptions() {
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    fetch("/api")
+    fetch("https://api-transporte-tijuana.onrender.com/api")
       .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);
