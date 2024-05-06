@@ -28,7 +28,7 @@
     "workbox-routing": "^7.1.0",
     "workbox-strategies": "^7.1.0"
   },
-  "proxy": "https://api-transporte-tijuana.onrender.com",
+  "proxy": "https://api-transporte-tijuana.onrender.com:3001/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
