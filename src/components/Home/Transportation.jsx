@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Card, CardContent, Typography, Container } from "@mui/material";
-import { height } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 const gridStyles = {
   maxWidth: "100%",
