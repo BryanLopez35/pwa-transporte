@@ -8,7 +8,7 @@ export default function Find() {
       {/* Contenedor de la sección del formulario */}
       <div
         style={{
-          minHeight: "91vh", // Ajusta la altura vertical del contenedor principal
+          minHeight: "92vh", // Ajusta la altura vertical del contenedor principal
           position: "relative", // Asegura que la superposición esté dentro del contenedor
           overflow: "hidden", // Evita que la superposición sobresalga del contenedor
           background: `url("https://cdn-3.expansion.mx/dims4/default/82048d0/2147483647/strip/true/crop/2107x1423+0+0/resize/1200x810!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F34%2F11ce48a3419c8f0f7f8ccc772ef0%2Fistock-880471902.jpg")`,
@@ -40,7 +40,11 @@ export default function Find() {
             variant="h3"
             component="h1"
             gutterBottom
-            style={{ color: "#fff", zIndex: 1 }}
+            style={{
+              color: "#fff",
+              zIndex: 1,
+              width: "100%", // Asegura que el ancho sea del 100% para dispositivos pequeños
+            }}
           >
             Explora tu ciudad, Muévete por{" "}
             <span style={{ fontWeight: "bold" }}>Tijuana</span>
@@ -50,8 +54,8 @@ export default function Find() {
               background: "rgba(255, 255, 255, 255)", // Fondo blanco semi-transparente
               borderRadius: "13px",
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
-              padding: "30px",
-              width: "100%", // Asegura que el ancho sea del 100% para dispositivos pequeños
+              padding: "35px",
+              width: "auto", // Asegura que el ancho sea del 100% para dispositivos pequeños
               maxWidth: "800px", // Limita el ancho máximo para pantallas más grandes
               margin: "auto", // Centra el contenido horizontalmente
               height: "auto", // Establece la altura automática para el formulario
@@ -63,7 +67,12 @@ export default function Find() {
               zIndex: 1, // Asegura que esté por encima del fondo
             }}
           >
-            <form noValidate style={{ width: "100%" }}>
+            <form
+              noValidate
+              style={{
+                width: "100%",
+              }}
+            >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -116,6 +125,7 @@ export default function Find() {
                       "&:active": {
                         backgroundColor: "#9f2241",
                       },
+                      height: "40px",
                     }}
                     onClick={() => alert("Botón presionado")}
                   >
