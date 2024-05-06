@@ -36,19 +36,36 @@ export default function Find() {
 
         {/* Contenido del formulario */}
         <Container component="main" maxWidth="md">
-          <Typography
-            variant="h3"
-            component="h1"
-            gutterBottom
+          <div
             style={{
-              color: "#fff",
-              zIndex: 1,
+              padding: "5px",
               width: "100%", // Asegura que el ancho sea del 100% para dispositivos pequeños
+              maxWidth: "700px", // Limita el ancho máximo para pantallas más grandes
+              margin: "auto", // Centra el contenido horizontalmente
+              height: "auto", // Establece la altura automática para el formulario
+              display: "flex", // Permite que los elementos se distribuyan verticalmente
+              flexDirection: "column", // Coloca los elementos en una columna
+              justifyContent: "space-between", // Distribuye los elementos de manera uniforme
+              alignItems: "center", // Centra los elementos horizontalmente
+              position: "relative", // Ajusta el z-index para que esté por encima del fondo
+              zIndex: 1, // Asegura que esté por encima del fondo
             }}
           >
-            Explora tu ciudad, Muévete por{" "}
-            <span style={{ fontWeight: "bold" }}>Tijuana</span>
-          </Typography>
+            <Typography
+              variant="h3"
+              component="h1"
+              gutterBottom
+              style={{
+                color: "#fff",
+                zIndex: 1,
+                width: "100%", // Asegura que el ancho sea del 100% para dispositivos pequeños
+              }}
+            >
+              Explora tu ciudad, Muévete por{" "}
+              <span style={{ fontWeight: "bold" }}>Tijuana</span>
+            </Typography>
+          </div>
+
           <div
             style={{
               background: "rgba(255, 255, 255, 255)", // Fondo blanco semi-transparente
@@ -56,7 +73,7 @@ export default function Find() {
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
               padding: "35px",
               width: "auto", // Asegura que el ancho sea del 100% para dispositivos pequeños
-              maxWidth: "800px", // Limita el ancho máximo para pantallas más grandes
+              maxWidth: "650px", // Limita el ancho máximo para pantallas más grandes
               margin: "auto", // Centra el contenido horizontalmente
               height: "auto", // Establece la altura automática para el formulario
               display: "flex", // Permite que los elementos se distribuyan verticalmente
