@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Card, CardContent, Typography, Container } from "@mui/material";
-import { Swiper, SwiperSlide } from 'swiper/react';
+
 
 const gridStyles = {
   maxWidth: "100%",
