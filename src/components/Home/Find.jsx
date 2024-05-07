@@ -68,7 +68,7 @@ export default function Find() {
 
           <div
             style={{
-              background: "#161b22", // Fondo blanco semi-transparente
+              background: "#161b22",
               borderRadius: "13px",
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.9)",
               padding: "35px",
@@ -103,6 +103,23 @@ export default function Find() {
                     name="origin"
                     sx={{
                       input: { color: "white" },
+                      "& .MuiInputLabel-root": {
+                        color: "#354557", // Cambia el color de la etiqueta
+                      },
+                      "& .MuiInputLabel-root.Mui-focused": {
+                        color: "#fff", // Cambia el color de la etiqueta cuando está enfocada
+                      },
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: "#354557", // Cambia el color del borde del TextField
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "#4a637f", // Cambia el color del borde al pasar el cursor
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "#4a637f", // Cambia el color del borde cuando está enfocado
+                        },
+                      },
                     }}
                     placeholder="Ingresa el punto de inicio"
                     InputProps={{
@@ -124,6 +141,23 @@ export default function Find() {
                     placeholder="Ingresa tu destino"
                     sx={{
                       input: { color: "white" },
+                      "& .MuiInputLabel-root": {
+                        color: "#354557", // Cambia el color de la etiqueta
+                      },
+                      "& .MuiInputLabel-root.Mui-focused": {
+                        color: "#fff", // Cambia el color de la etiqueta cuando está enfocada
+                      },
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: "#354557", // Cambia el color del borde del TextField
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "#4a637f", // Cambia el color del borde al pasar el cursor
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "#4a637f", // Cambia el color del borde cuando está enfocado
+                        },
+                      },
                     }}
                     InputProps={{
                       startAdornment: (
