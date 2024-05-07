@@ -6,7 +6,7 @@ const gridStyles = {
   margin: "0 auto", // Centra la tarjeta horizontalmente
   borderRadius: "13px",
   boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.4)",
-  height: "150px",
+  height: "250px",
 };
 
 export default function TransportationOptions() {
@@ -15,8 +15,12 @@ export default function TransportationOptions() {
       style={{
         backgroundColor: "#F3F4F6",
         width: "100%",
-        position: "auto", // Asegura que la superposición esté dentro del contenedor
-        height: "auto",
+        minHeight: "50vh", // Cambiando height por minHeight
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center",
+        position: "relative",
       }}
     >
       <Container component="main" maxWidth="lg" style={{ margin: "45px auto" }}>

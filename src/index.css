@@ -40,13 +40,3 @@ main {
   display: grid;
   place-items: center;
 }
-
-button {
-  background-color: lightcoral;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 1rem;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
