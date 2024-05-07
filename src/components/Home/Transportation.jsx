@@ -36,7 +36,7 @@ export default function TransportationOptions() {
           <span style={{ fontWeight: "bold" }}>Opciones de Transporte</span>
         </Typography>
         <Grid container spacing={2} justifyContent="center">
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <Card style={gridStyles}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
@@ -48,7 +48,7 @@ export default function TransportationOptions() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <Card style={gridStyles}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
@@ -60,19 +60,7 @@ export default function TransportationOptions() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card style={gridStyles}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Card Title
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  Card Content goes here
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <Card style={gridStyles}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
