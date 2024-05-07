@@ -85,7 +85,7 @@ const NavContainer = styled.nav`
     }
   }
   padding: 0.4rem;
-  background-color: #161b22;
+  background-color: #05141a;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -139,7 +139,7 @@ const NavContainer = styled.nav`
 `;
 
 const BgDiv = styled.div`
-  background-color: #161b22;
+  background-color: #05141a;
   position: absolute;
   top: 0;
   left: 0;
