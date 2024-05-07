@@ -85,7 +85,7 @@ const NavContainer = styled.nav`
     }
   }
   padding: 0.4rem;
-  background-color: #05141a;
+  background-color: #161b22;
   display: flex;
   align-items: center;
   justify-content: space-between;
