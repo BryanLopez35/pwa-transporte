@@ -139,7 +139,6 @@ const NavContainer = styled.nav`
 `;
 
 const BgDiv = styled.div`
-  background-color: #05141a;
   position: absolute;
   top: 0;
   left: 0;
