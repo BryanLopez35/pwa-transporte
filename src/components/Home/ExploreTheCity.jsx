@@ -1,6 +1,14 @@
 import React from "react";
 import { Grid, Card, CardContent, Typography, Container } from "@mui/material";
-import ExploreCityCard from "../Cards/ExplorerTheCityCards";
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+const gridStyles = {
+  maxWidth: "100%",
+  margin: "0 auto", // Centra la tarjeta horizontalmente
+  borderRadius: "13px",
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.4)",
+  height: "250px",
+};
 
 export default function ExploreTheCity() {
   return (
@@ -29,7 +37,54 @@ export default function ExploreTheCity() {
           <span style={{ fontWeight: "bold" }}>Explora la Ciudad</span>
         </Typography>
         <Grid container spacing={2} justifyContent="center">
-          <ExploreCityCard />
+          <Grid item xs={12} sm={6} md={3}>
+            <Card style={gridStyles}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Card Title
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Card Content goes here
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <Card style={gridStyles}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Card Title
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Card Content goes here
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <Card style={gridStyles}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Card Title
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Card Content goes here
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <Card style={gridStyles}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Card Title
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Card Content goes here
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
       </Container>
     </div>
