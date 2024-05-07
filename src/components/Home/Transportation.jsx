@@ -5,15 +5,16 @@ const gridStyles = {
   maxWidth: "100%",
   margin: "0 auto", // Centra la tarjeta horizontalmente
   borderRadius: "13px",
-  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.4)",
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.7)",
   height: "250px",
+  backgroundColor: "#303b4a",
+  color: "#fff",
 };
 
 export default function TransportationOptions() {
   return (
     <div
       style={{
-        backgroundColor: "#F3F4F6",
         width: "100%",
         minHeight: "50vh", // Cambiando height por minHeight
         display: "flex",
@@ -29,7 +30,7 @@ export default function TransportationOptions() {
           component="h1"
           gutterBottom
           style={{
-            color: "#000",
+            color: "#fff",
             width: "100%", // Asegura que el ancho sea del 100% para dispositivos pequeños
           }}
         >
@@ -42,7 +43,7 @@ export default function TransportationOptions() {
                 <Typography variant="h6" gutterBottom>
                   Card Title
                 </Typography>
-                <Typography variant="body2" color="textSecondary">
+                <Typography variant="body2" color="white">
                   Card Content goes here
                 </Typography>
               </CardContent>
@@ -54,7 +55,7 @@ export default function TransportationOptions() {
                 <Typography variant="h6" gutterBottom>
                   Card Title
                 </Typography>
-                <Typography variant="body2" color="textSecondary">
+                <Typography variant="body2" color="white">
                   Card Content goes here
                 </Typography>
               </CardContent>
@@ -66,7 +67,7 @@ export default function TransportationOptions() {
                 <Typography variant="h6" gutterBottom>
                   Card Title
                 </Typography>
-                <Typography variant="body2" color="textSecondary">
+                <Typography variant="body2" color="white">
                   Card Content goes here
                 </Typography>
               </CardContent>

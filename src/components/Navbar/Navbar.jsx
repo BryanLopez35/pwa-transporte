@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import BurgerButton from "./BurgerButton";
 import { Link } from "react-router-dom";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 function Navbar() {
   const [clicked, setClicked] = React.useState(false);
@@ -59,13 +59,14 @@ function Navbar() {
           <Link to="/galeria">Galería</Link>
           <Link to="/acerca">Sobre Nosotros</Link>
           {isReadyForInstall && (
-            <Button  variant="contained" onClick={downloadApp}> Descargar </Button>
+            <Button variant="contained" onClick={downloadApp}>
+              Descargar
+            </Button>
           )}
-         
         </div>
-        <div className="burger">
+        <BurgerButtonWrapper className="burger">
           <BurgerButton clicked={clicked} handleClick={handleClick} />
-        </div>
+        </BurgerButtonWrapper>
         <BgDiv className={`initial ${clicked ? "active" : ""}`} />
       </NavContainer>
     </>
@@ -75,6 +76,7 @@ function Navbar() {
 export default Navbar;
 
 const NavContainer = styled.nav`
+  z-index: 1000;
   h2 {
     color: white;
     font-weight: 400;
@@ -83,7 +85,7 @@ const NavContainer = styled.nav`
     }
   }
   padding: 0.4rem;
-  background-color: #9f2241;
+  background-color: #05141a;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -134,19 +136,13 @@ const NavContainer = styled.nav`
       color: white;
     }
   }
-
-  .burger {
-    @media (min-width: 768px) {
-      display: none;
-    }
-  }
 `;
 
 const BgDiv = styled.div`
-  background-color: #691c32;
+  background-color: #161b22;
   position: absolute;
-  top: -1200px;
-  left: -1200px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
@@ -158,5 +154,11 @@ const BgDiv = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+  }
+`;
+
+const BurgerButtonWrapper = styled.div`
+  @media (min-width: 768px) {
+    display: none;
   }
 `;

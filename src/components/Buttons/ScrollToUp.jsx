@@ -51,12 +51,12 @@ export default function ScrollToTop() {
         style={buttonStyle}
         variant="contained"
         sx={{
-          background: "#e0536c",
+          background: "#5e7c99",
           "&:hover": {
-            backgroundColor: "#cc3255",
+            backgroundColor: "#4a637f",
           },
           "&:active": {
-            backgroundColor: "#9f2241",
+            backgroundColor: "#3d5067",
           },
           height: "40px",
         }}

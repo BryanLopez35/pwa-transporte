@@ -29,7 +29,7 @@ export default function Find() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.6)", // Color oscuro con opacidad
+            backgroundColor: "rgba(0, 0, 0, 0.7)", // Color oscuro con opacidad
             zIndex: -1, // Asegura que esté detrás de los elementos del formulario
           }}
         />
@@ -68,9 +68,9 @@ export default function Find() {
 
           <div
             style={{
-              background: "rgba(255, 255, 255, 255)", // Fondo blanco semi-transparente
+              background: "#161b22", // Fondo blanco semi-transparente
               borderRadius: "13px",
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.9)",
               padding: "35px",
               width: "auto", // Asegura que el ancho sea del 100% para dispositivos pequeños
               maxWidth: "650px", // Limita el ancho máximo para pantallas más grandes
@@ -88,6 +88,7 @@ export default function Find() {
               noValidate
               style={{
                 width: "100%",
+                color: "#fff",
               }}
             >
               <Grid container spacing={2}>
@@ -100,9 +101,8 @@ export default function Find() {
                     id="origin"
                     label="Origen"
                     name="origin"
-                    autoFocus
                     sx={{
-                      borderColor: "#ec8090",
+                      input: { color: "white" },
                     }}
                     placeholder="Ingresa el punto de inicio"
                     InputProps={{
@@ -122,6 +122,9 @@ export default function Find() {
                     label="Destino"
                     name="destination"
                     placeholder="Ingresa tu destino"
+                    sx={{
+                      input: { color: "white" },
+                    }}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start"></InputAdornment>
@@ -135,12 +138,12 @@ export default function Find() {
                     fullWidth
                     variant="contained"
                     sx={{
-                      background: "#e0536c",
+                      background: "#5e7c99",
                       "&:hover": {
-                        backgroundColor: "#cc3255",
+                        backgroundColor: "#4a637f",
                       },
                       "&:active": {
-                        backgroundColor: "#9f2241",
+                        backgroundColor: "#3d5067",
                       },
                       height: "40px",
                     }}
