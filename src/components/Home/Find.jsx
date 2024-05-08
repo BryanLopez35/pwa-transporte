@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Container, Typography, TextField, Button, Grid } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { useTransition } from "@react-spring/web";
-import Header from "./Header/Header";
 
 const images = [
   "https://cdn-3.expansion.mx/dims4/default/82048d0/2147483647/strip/true/crop/2107x1423+0+0/resize/1200x810!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F34%2F11ce48a3419c8f0f7f8ccc772ef0%2Fistock-880471902.jpg",
@@ -12,7 +11,7 @@ const images = [
 ];
 export default function Find() {
   const [index, set] = useState(0);
-  const transitions = useTransition(index, {
+  useTransition(index, {
     key: index,
     from: { opacity: 0 },
     enter: { opacity: 1 },
