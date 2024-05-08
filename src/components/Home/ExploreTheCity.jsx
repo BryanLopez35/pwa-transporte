@@ -92,7 +92,7 @@ const ExploreTheCity = () => {
             width: "100%",
           }}
         >
-          <span style={{ fontWeight: "bold" }}>Opciones de Transporte</span>
+          <span style={{ fontWeight: "bold" }}>Explora tu ciudad</span>
         </Typography>
         <Carousel
           autoPlay={true}

@@ -58,12 +58,10 @@ function Navbar() {
           <Link to="/">Inicio</Link>
           <Link to="/galeria">Galería</Link>
           <Link to="/acerca">Sobre Nosotros</Link>
-          {isReadyForInstall && (
-            <Button variant="contained" onClick={downloadApp}>
-              Descargar
-            </Button>
-          )}
         </div>
+        <Button variant="contained" onClick={downloadApp}>
+          Descargar
+        </Button>
         <BurgerButtonWrapper className="burger">
           <BurgerButton clicked={clicked} handleClick={handleClick} />
         </BurgerButtonWrapper>

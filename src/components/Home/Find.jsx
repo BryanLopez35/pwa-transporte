@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Typography, TextField, Button, Grid } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useTransition } from "@react-spring/web";
+import Header from "./Header/Header";
 
+const images = [
+  "https://cdn-3.expansion.mx/dims4/default/82048d0/2147483647/strip/true/crop/2107x1423+0+0/resize/1200x810!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F34%2F11ce48a3419c8f0f7f8ccc772ef0%2Fistock-880471902.jpg",
+  "https://www.tripsavvy.com/thmb/nOLfxryJsaBbNYMozBiUpb7nERA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TijuanaPlazaSantaCecilia-2-81bb03affd0b48659296e14fa50b5a8e.jpg",
+  "https://aecomercializadora.com.mx/wp-content/uploads/2023/04/tijuana-2.jpg",
+  // Agrega más URLs de imágenes aquí
+];
 export default function Find() {
+  const [index, set] = useState(0);
+  const transitions = useTransition(index, {
+    key: index,
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: { duration: 3000 },
+    onRest: (_a, _b, item) => {
+      if (index === item) {
+        set((state) => (state + 1) % images.length);
+      }
+    },
+    exitBeforeEnter: true,
+  });
+
   return (
     <>
       {/* Contenedor de la sección del formulario */}
@@ -11,13 +34,14 @@ export default function Find() {
           minHeight: "92vh", // Ajusta la altura vertical del contenedor principal
           position: "relative", // Asegura que la superposición esté dentro del contenedor
           overflow: "hidden", // Evita que la superposición sobresalga del contenedor
-          background: `url("https://cdn-3.expansion.mx/dims4/default/82048d0/2147483647/strip/true/crop/2107x1423+0+0/resize/1200x810!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F34%2F11ce48a3419c8f0f7f8ccc772ef0%2Fistock-880471902.jpg")`,
+          backgroundImage: `url(${images[index]})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           width: "100%",
+          willChange: "opacity",
           zIndex: 0,
         }}
       >
@@ -29,7 +53,7 @@ export default function Find() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.7)", // Color oscuro con opacidad
+            backgroundColor: "rgba(0, 0, 0, 0.8)", // Color oscuro con opacidad
             zIndex: -1, // Asegura que esté detrás de los elementos del formulario
           }}
         />
