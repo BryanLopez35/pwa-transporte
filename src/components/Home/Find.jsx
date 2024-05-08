@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Typography, TextField, Button, Grid } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { useTransition } from "@react-spring/web";
+import IconButton from "@mui/material/IconButton";
+import { Room } from "@mui/icons-material";
+import { CircularProgress } from '@mui/material';
 
 const images = [
   "https://cdn-3.expansion.mx/dims4/default/82048d0/2147483647/strip/true/crop/2107x1423+0+0/resize/1200x810!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F34%2F11ce48a3419c8f0f7f8ccc772ef0%2Fistock-880471902.jpg",
@@ -10,6 +13,32 @@ const images = [
   // Agrega más URLs de imágenes aquí
 ];
 export default function Find() {
+  const [fetchingLocation, setFetchingLocation] = useState(false);
+
+  const [userAddress, setUserAddress] = useState("");
+  const getUserLocation = () => {
+    if (navigator.geolocation) {
+      setFetchingLocation(true); // Indicar que se está obteniendo la ubicación
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const { latitude, longitude } = position.coords;
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`
+          );
+          const data = await response.json();
+          const { display_name } = data;
+          setUserAddress(display_name);
+        } catch (error) {
+          console.error("Error fetching user address:", error);
+        } finally {
+          setFetchingLocation(false); // Indicar que se ha obtenido la ubicación
+        }
+      });
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
+
   const [index, set] = useState(0);
   useTransition(index, {
     key: index,
@@ -30,7 +59,7 @@ export default function Find() {
       {/* Contenedor de la sección del formulario */}
       <div
         style={{
-          minHeight: "92vh", // Ajusta la altura vertical del contenedor principal
+          minHeight: "90vh", // Ajusta la altura vertical del contenedor principal
           position: "relative", // Asegura que la superposición esté dentro del contenedor
           overflow: "hidden", // Evita que la superposición sobresalga del contenedor
           backgroundImage: `url(${images[index]})`,
@@ -124,6 +153,8 @@ export default function Find() {
                     id="origin"
                     label="Origen"
                     name="origin"
+                    value={userAddress}
+                    onChange={(e) => setUserAddress(e.target.value)}
                     sx={{
                       input: { color: "white" },
                       "& .MuiInputLabel-root": {
@@ -146,6 +177,22 @@ export default function Find() {
                     }}
                     placeholder="Ingresa el punto de inicio"
                     InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="Obtener ubicación"
+                            edge="end"
+                            onClick={getUserLocation}
+                            disabled={fetchingLocation} // Deshabilitar el botón mientras se obtiene la ubicación
+                          >
+                            {fetchingLocation ? (
+                              <CircularProgress size={24} />
+                            ) : (
+                              <Room style={{ color: "white" }} />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
                       startAdornment: (
                         <InputAdornment position="start"></InputAdornment>
                       ),

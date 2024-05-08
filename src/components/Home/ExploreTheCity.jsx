@@ -1,5 +1,12 @@
 import React from "react";
-import { Typography, Container, Card, CardContent, Grid, IconButton } from "@mui/material";
+import {
+  Typography,
+  Container,
+  Card,
+  CardContent,
+  Grid,
+  IconButton,
+} from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 
@@ -10,7 +17,6 @@ const gridStyles = {
   height: "250px",
   backgroundColor: "#303b4a",
   color: "#fff",
-
 };
 
 const cardsData = [
@@ -73,16 +79,19 @@ const ExploreTheCity = () => {
     <div
       style={{
         width: "100%",
-        minHeight: "50vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
         position: "relative",
-        backgroundColor: "#161b22"
+        backgroundColor: "#161b22",
       }}
     >
-      <Container component="main" maxWidth="lg" style={{ margin: "45px auto" }}>
+      <Container
+        component="main"
+        maxWidth="lg"
+        style={{ margin: "122px auto" }}
+      >
         <Typography
           variant="h4"
           component="h1"

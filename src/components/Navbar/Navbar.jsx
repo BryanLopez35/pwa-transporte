@@ -51,7 +51,7 @@ function Navbar() {
         <Link to="/">
           {" "}
           <h2>
-            Muévete por <span>Tijuana</span>
+            Tijuana en <span>Ruta</span>
           </h2>
         </Link>
         <div className={`links ${clicked ? "active" : ""}`}>
