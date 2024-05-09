@@ -66,7 +66,7 @@ function ResponsiveAppBar() {
     setIsReadyForInstall(false);
   }
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#161b22" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#05141a"  }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Icon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
