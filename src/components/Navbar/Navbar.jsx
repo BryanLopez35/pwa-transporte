@@ -11,6 +11,8 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import ForkLeftIcon from "@mui/icons-material/ForkLeft";
 import { useNavigate } from "react-router-dom";
+import { Icon } from "@mui/material";
+import Logo from "./logo.png";
 
 const pages = [
   { title: "Inicio", link: "/" },
@@ -30,7 +32,6 @@ function ResponsiveAppBar() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
 
   const [isReadyForInstall, setIsReadyForInstall] = React.useState(false);
 
@@ -69,14 +70,16 @@ function ResponsiveAppBar() {
     <AppBar position="static" sx={{ backgroundColor: "#161b22" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <ForkLeftIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Icon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+            <img src={Logo} />
+          </Icon>
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/"
             sx={{
-              mr: 2,
+              mr: 6,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
@@ -129,7 +132,9 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <ForkLeftIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Icon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
+            <img src={Logo} />
+          </Icon>
           <Typography
             variant="h5"
             noWrap
