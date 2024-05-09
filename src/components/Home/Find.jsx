@@ -119,13 +119,13 @@ export default function Find() {
               component="h1"
               gutterBottom
               style={{
-                color: "#fff",
+                color: "#f5f7fa",
                 zIndex: 1,
                 width: "100%", // Asegura que el ancho sea del 100% para dispositivos pequeños
               }}
             >
               Explora tu ciudad, Muévete por{" "}
-              <span style={{ fontWeight: "bold" }}>Tijuana</span>
+              <span style={{ fontWeight: "bold" , color:"#d3dbe4"}}>Tijuana</span>
             </Typography>
           </div>
 
