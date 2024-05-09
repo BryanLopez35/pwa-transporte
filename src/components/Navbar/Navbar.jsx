@@ -9,7 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import ForkLeftIcon from "@mui/icons-material/ForkLeft";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@mui/material";
 import Logo from "./logo.png";
@@ -71,7 +70,7 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Icon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
-            <img src={Logo} />
+            <img src={Logo} alt="Logo Tijuana en Ruta" />
           </Icon>
           <Typography
             variant="h6"
@@ -133,7 +132,7 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
           <Icon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
-            <img src={Logo} />
+            <img src={Logo} alt="Logo Tijuana en Ruta" />
           </Icon>
           <Typography
             variant="h5"
