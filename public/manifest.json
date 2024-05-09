@@ -1,7 +1,7 @@
 {
   "background_color": "#ffffff",
   "categories": ["travel", "utilities", "navigation"],
-  "description": "PWA transporte de tijuana",
+  "description": "Tijuana en Ruta",
   "dir": "ltr",
   "display_override": ["standalone", "fullscreen", "minimal-ui"],
   "display": "standalone",
@@ -24,6 +24,15 @@
   "orientation": "portrait",
   "prefer_related_applications": false,
   "scope": "/",
+  "screenshots": [
+    {
+      "src": "screenshot1.webp",
+      "type": "image/webp",
+      "sizes": "1280x720",
+      "form_factor": "wide",
+      "label": "Aplicación"
+    }
+  ],
   "short_name": "Tijuana en Ruta",
   "start_url": "/",
   "theme_color": "orange"
