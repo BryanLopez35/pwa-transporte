@@ -64,7 +64,6 @@ export default function TransportationOptions() {
             Aliquam a orci suscipit sapien elementum sollicitudin.
           </Typography>
         </div>
-
         <Grid container spacing={2} justifyContent="center" maxWidth="lg">
           <Grid item xs={12} sm={6} md={4}>
             <Card style={gridStyles}>

@@ -1,6 +1,6 @@
-import Find from "./Home/Find";
-import TransportationOptions from "./Home/Transportation";
-import ExploreTheCity from "./Home/ExploreTheCity";
+import Find from "./Find";
+import TransportationOptions from "./Transportation";
+import ExploreTheCity from "./ExploreTheCity";
 
 export default function Home() {
   return (

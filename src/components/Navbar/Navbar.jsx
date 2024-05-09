@@ -1,15 +1,36 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
-import BurgerButton from "./BurgerButton";
-import { Link } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import ForkLeftIcon from "@mui/icons-material/ForkLeft";
+import { useNavigate } from "react-router-dom";
 
-function Navbar() {
-  const [clicked, setClicked] = React.useState(false);
+const pages = [
+  { title: "Inicio", link: "/" },
+  { title: "Galería", link: "/galeria" },
+  { title: "Puntos de Interes", link: "/puntos-de-interes" },
+  { title: "Sobre", link: "/acerca" },
+];
 
-  const handleClick = () => {
-    setClicked(!clicked);
+function ResponsiveAppBar() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate();
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
   };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
 
   const [isReadyForInstall, setIsReadyForInstall] = React.useState(false);
 
@@ -44,123 +65,122 @@ function Navbar() {
     // Hide the install button.
     setIsReadyForInstall(false);
   }
-
   return (
-    <>
-      <NavContainer className={`links ${clicked ? "active" : ""}`}>
-        <Link to="/">
-          {" "}
-          <h2>
-            Tijuana en <span>Ruta</span>
-          </h2>
-        </Link>
-        <div className={`links ${clicked ? "active" : ""}`}>
-          <Link to="/">Inicio</Link>
-          <Link to="/galeria">Galería</Link>
-          <Link to="/acerca">Sobre Nosotros</Link>
-        </div>
-        {isReadyForInstall && (
-          <Button
-            variant="contained"
-            onClick={downloadApp}
+    <AppBar position="static" sx={{ backgroundColor: "#161b22" }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <ForkLeftIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              color: "inherit",
+              textDecoration: "none",
+            }}
           >
-            Descargar
-          </Button>
-        )}
-        <BurgerButtonWrapper className="burger">
-          <BurgerButton clicked={clicked} handleClick={handleClick} />
-        </BurgerButtonWrapper>
-        <BgDiv className={`initial ${clicked ? "active" : ""}`} />
-      </NavContainer>
-    </>
+            Tijuana en Ruta
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem
+                  key={page.link}
+                  onClick={() => {
+                    navigate(page.link);
+                    handleCloseNavMenu();
+                  }}
+                >
+                  <Typography textAlign="center">{page.title}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <ForkLeftIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              flexGrow: 1,
+              fontFamily: "monospace",
+              fontWeight: 700,
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            Tijuana en Ruta
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                key={page.link}
+                onClick={() => {
+                  navigate(page.link);
+                  handleCloseNavMenu();
+                }}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {page.title}
+              </Button>
+            ))}
+          </Box>
+          {isReadyForInstall && (
+            <Button
+              variant="contained"
+              onClick={downloadApp}
+              sx={{
+                background: "#5e7c99",
+                "&:hover": {
+                  backgroundColor: "#4a637f",
+                },
+                "&:active": {
+                  backgroundColor: "#3d5067",
+                },
+              }}
+            >
+              Descargar
+            </Button>
+          )}
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
-
-export default Navbar;
-
-const NavContainer = styled.nav`
-  z-index: 1000;
-  h2 {
-    color: white;
-    font-weight: 400;
-    span {
-      font-weight: bold;
-    }
-  }
-  padding: 0.4rem;
-  background-color: #05141a;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  a {
-    color: white;
-    text-decoration: none;
-    margin-right: 1rem;
-  }
-
-  .links {
-    position: absolute;
-    top: -700px;
-    left: -2000px;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    transition: all 0.5s ease;
-    a {
-      color: white;
-      font-size: 2rem;
-      display: block;
-    }
-    @media (min-width: 768px) {
-      position: initial;
-      margin: 0;
-      a {
-        font-size: 1rem;
-        color: white;
-        display: inline;
-      }
-      display: block;
-    }
-  }
-  .links.active {
-    width: 100%;
-    display: block;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    top: 30%;
-    left: 0;
-    right: 0;
-    text-align: center;
-    a {
-      font-size: 2rem;
-      margin-top: 1rem;
-      color: white;
-    }
-  }
-`;
-
-const BgDiv = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  transition: all 0.6s ease;
-
-  &.active {
-    border-radius: 0 0 80% 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-const BurgerButtonWrapper = styled.div`
-  @media (min-width: 768px) {
-    display: none;
-  }
-`;
+export default ResponsiveAppBar;

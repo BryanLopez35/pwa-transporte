@@ -5,12 +5,10 @@ import "./Footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagram,
-  faTwitter,
   faGithub,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function Footer() {
@@ -20,7 +18,6 @@ export default function Footer() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          minHeight: "100vh",
         }}
       >
         <Box
@@ -33,9 +30,9 @@ export default function Footer() {
             <div className="sb__footer section__padding">
               <div className="sb__footer-links">
                 <div className="sb__footer-links_div">
-                  <h4>Contáctanos</h4>
+                  <h4>Contáctame</h4>
                   <a href="/employer">
-                    <p>Escríbenos</p>
+                    <p>Escríbeme</p>
                   </a>
                 </div>
                 <div className="sb__footer-links_div">
@@ -57,15 +54,15 @@ export default function Footer() {
                 </div>
                 <div className="sb__footer-links_div">
                   <h4>Sobre</h4>
-                  <a href="/employer">
-                    <p>Nosotros</p>
+                  <a href="/acerca">
+                    <p>Mí</p>
                   </a>
                   <a href="/employer">
                     <p>Nuestro Proyecto</p>
                   </a>
                 </div>
                 <div className="sb__footer-links_div">
-                  <h4>Síguenos en</h4>
+                  <h4>Sígueme en</h4>
                   <div className="socialmedia">
                     <p>
                       <a
@@ -74,15 +71,6 @@ export default function Footer() {
                         rel="noopener noreferrer"
                       >
                         <FontAwesomeIcon icon={faInstagram} size="3x" />
-                      </a>
-                    </p>
-                    <p>
-                      <a
-                        href="https://www.twitter.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FontAwesomeIcon icon={faTwitter} size="3x" />
                       </a>
                     </p>
                     <p>

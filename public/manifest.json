@@ -20,11 +20,11 @@
     }
   ],
   "lang": "es-MX",
-  "name": "PWA Transporte Tijuna",
+  "name": "Tijuana en Ruta",
   "orientation": "portrait",
   "prefer_related_applications": false,
   "scope": "/",
-  "short_name": "PWA Transporte Tijuana",
+  "short_name": "Tijuana en Ruta",
   "start_url": "/",
   "theme_color": "orange"
 }

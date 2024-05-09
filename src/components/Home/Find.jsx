@@ -4,7 +4,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { useTransition } from "@react-spring/web";
 import IconButton from "@mui/material/IconButton";
 import { Room } from "@mui/icons-material";
-import { CircularProgress } from '@mui/material';
+import { CircularProgress } from "@mui/material";
 
 const images = [
   "https://cdn-3.expansion.mx/dims4/default/82048d0/2147483647/strip/true/crop/2107x1423+0+0/resize/1200x810!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F34%2F11ce48a3419c8f0f7f8ccc772ef0%2Fistock-880471902.jpg",
@@ -14,28 +14,39 @@ const images = [
 ];
 export default function Find() {
   const [fetchingLocation, setFetchingLocation] = useState(false);
-
   const [userAddress, setUserAddress] = useState("");
   const getUserLocation = () => {
     if (navigator.geolocation) {
-      setFetchingLocation(true); // Indicar que se está obteniendo la ubicación
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const { latitude, longitude } = position.coords;
-        try {
-          const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`
-          );
-          const data = await response.json();
-          const { display_name } = data;
-          setUserAddress(display_name);
-        } catch (error) {
-          console.error("Error fetching user address:", error);
-        } finally {
-          setFetchingLocation(false); // Indicar que se ha obtenido la ubicación
+      setFetchingLocation(true);
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          try {
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`
+            );
+            const data = await response.json();
+            const { display_name } = data;
+            setUserAddress(display_name);
+          } catch (error) {
+            console.error("Error fetching user address:", error);
+          } finally {
+            setFetchingLocation(false);
+          }
+        },
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            alert(
+              "Para usar esta función, por favor habilita los permisos de ubicación en tu navegador."
+            );
+          } else {
+            alert("Ocurrió un error al obtener la ubicación.");
+          }
+          setFetchingLocation(false);
         }
-      });
+      );
     } else {
-      console.error("Geolocation is not supported by this browser.");
+      alert("Tu navegador no soporta geolocalización.");
     }
   };
 
@@ -59,7 +70,7 @@ export default function Find() {
       {/* Contenedor de la sección del formulario */}
       <div
         style={{
-          minHeight: "90vh", // Ajusta la altura vertical del contenedor principal
+          minHeight: "92vh", // Ajusta la altura vertical del contenedor principal
           position: "relative", // Asegura que la superposición esté dentro del contenedor
           overflow: "hidden", // Evita que la superposición sobresalga del contenedor
           backgroundImage: `url(${images[index]})`,
