@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a8f20f4e-e231-4a99-a663-27b7c06d94f8/deploy-status)](https://app.netlify.com/sites/transporte-tijuana/deploys)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
