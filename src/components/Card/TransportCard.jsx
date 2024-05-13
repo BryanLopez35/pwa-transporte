@@ -1,5 +1,5 @@
 import React from "react";
-import "./TransportCard.css"; // Asegúrate de tener un archivo CSS para este componente
+import "./TransportCard.css";
 
 const TransportCard = ({ frontContent, descText, backgroundImage }) => {
   return (

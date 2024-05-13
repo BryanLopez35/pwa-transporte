@@ -15,8 +15,9 @@ import Logo from "./logo.png";
 
 const pages = [
   { title: "Inicio", link: "/" },
-  { title: "Galería", link: "/galeria" },
+  { title: "Rutas", link: "/rutas" },
   { title: "Puntos de Interes", link: "/puntos-de-interes" },
+  { title: "Galería", link: "/galeria" },
   { title: "Sobre", link: "/acerca" },
 ];
 
