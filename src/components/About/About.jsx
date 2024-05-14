@@ -26,6 +26,7 @@ export default function About() {
           <Box
             sx={{
               display: "flex",
+              flexDirection: { xs: "column-reverse", md: "row" },
               alignItems: "center",
               justifyContent: "space-between",
               gap: 10,
@@ -34,7 +35,7 @@ export default function About() {
             <Box sx={{ flex: 1 }}>
               <Typography
                 variant="subtitle1"
-                sx={{ bgcolor: "#f5f5f5", py: 1, px: 3, borderRadius: "10px" }}
+                sx={{ bgcolor: "#303b4a", py: 1, px: 3, borderRadius: "10px" }}
               >
                 Sobre mi
               </Typography>
@@ -64,119 +65,227 @@ export default function About() {
                   borderRadius: "50%",
                   overflow: "hidden",
                   objectFit: "cover",
-                  width: 300,
-                  height: 300,
+                  width: { xs: 300, md: "auto" },
+                  height: { xs: 300, md: "auto" },
+                  mt: { xs: 3, md: 0 }, // Ajusta el espacio superior en dispositivos pequeños
                 }}
               />
             </Box>
           </Box>
         </Container>
       </Box>
+      <Box
+        py={12}
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 10,
+          color: "#fff",
+        }}
+      >
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            gap: 10,
+          }}
+          maxWidth="lg"
+        >
+          <Box sx={{ flex: 1 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{ bgcolor: "#303b4a", py: 1, px: 3, borderRadius: "10px" }}
+            >
+              <Badge>Skills</Badge>
+            </Typography>
+            <Typography
+              variant="h3"
+              fontWeight="bold"
+              sx={{ mt: 2, color: "#fff" }}
+            >
+              Qué puedo hacer
+            </Typography>
+            <Box
+              mt={6}
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: 4,
+              }}
+            >
+              {skills.map((skill, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    borderRadius: "10px",
+                    backgroundColor: "#303b4a",
+                    p: 4,
+                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                    color: "#fff",
+                  }}
+                >
+                  {skill.icon}
+                  <Typography variant="h6" mt={2}>
+                    {skill.title}
+                  </Typography>
+                  <Typography variant="body1" mt={2} color="#fff">
+                    {skill.description}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
 
-      <Box py={12}>
-        <Container maxWidth="lg">
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 10,
-            }}
-          >
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="subtitle1"
-                sx={{ bgcolor: "#f5f5f5", py: 1, px: 3, borderRadius: "10px" }}
-              >
-                <Badge>Skills</Badge>
-              </Typography>
-              <Typography
-                variant="h3"
-                fontWeight="bold"
-                sx={{ mt: 2, color: "#fff" }}
-              >
-                Qué puedo hacer
-              </Typography>
+          <Box sx={{ flex: 1 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{ bgcolor: "#303b4a", py: 1, px: 3, borderRadius: "10px" }}
+            >
+              Experiencia
+            </Typography>
+            <Typography variant="h3" fontWeight="bold" sx={{ mt: 2 }}>
+              Experiencia laboral
+            </Typography>
+            <Box mt={6} sx={{ display: "grid", gap: 6 }}>
+              {experience.map((job, index) => (
+                <Box key={index}>
+                  <Typography variant="h6" fontWeight="bold">
+                    {job.position}
+                  </Typography>
+                  <Typography variant="body1">
+                    {job.company} | {job.date}
+                  </Typography>
+                  <ul>
+                    {job.details.map((detail, idx) => (
+                      <li key={idx}>
+                        <CheckIcon sx={{ mr: 1 }} />
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        py={12}
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 10,
+          color: "#fff",
+        }}
+      >
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            gap: 10,
+          }}
+          maxWidth="lg"
+        >
+          <Box sx={{ flex: 1 }}>
+            <Container maxWidth="lg">
               <Box
-                mt={6}
                 sx={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(2, 1fr)",
-                  gap: 4,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 10,
                 }}
               >
-                {skills.map((skill, index) => (
-                  <Box
-                    key={index}
+                <Box sx={{ flex: 1 }}>
+                  <Typography
+                    variant="subtitle1"
                     sx={{
+                      bgcolor: "#303b4a",
+                      py: 1,
+                      px: 3,
                       borderRadius: "10px",
-                      backgroundColor: "#303b4a",
-                      p: 4,
-                      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                      color: "#fff",
                     }}
                   >
-                    {skill.icon}
-                    <Typography variant="h6" mt={2}>
-                      {skill.title}
-                    </Typography>
-                    <Typography variant="body1" mt={2} color="#fff">
-                      {skill.description}
-                    </Typography>
+                    Educación
+                  </Typography>
+                  <Typography variant="h3" fontWeight="bold" sx={{ mt: 2 }}>
+                    Formación académica
+                  </Typography>
+                  <Box mt={6} sx={{ display: "grid", gap: 6 }}>
+                    {education.map((edu, index) => (
+                      <Box key={index}>
+                        <Typography variant="h6" fontWeight="bold">
+                          {edu.degree}
+                        </Typography>
+                        <Typography variant="body1" color="#fff">
+                          {edu.institution} | {edu.date}
+                        </Typography>
+                        <ul>
+                          {edu.details.map((detail, idx) => (
+                            <li key={idx}>
+                              <CheckIcon sx={{ mr: 1 }} />
+                              {detail}
+                            </li>
+                          ))}
+                        </ul>
+                      </Box>
+                    ))}
                   </Box>
-                ))}
+                </Box>
               </Box>
-            </Box>
+            </Container>
           </Box>
-        </Container>
-      </Box>
-
-      <Box py={12}>
-        <Container maxWidth="lg">
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 10,
-              color: "#fff",
-            }}
-          >
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="subtitle1"
-                sx={{ bgcolor: "#f5f5f5", py: 1, px: 3, borderRadius: "10px" }}
+          <Box sx={{ flex: 1 }}>
+            <Container maxWidth="lg">
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 10,
+                  color: "#fff",
+                }}
               >
-                Experiencia
-              </Typography>
-              <Typography variant="h3" fontWeight="bold" sx={{ mt: 2 }}>
-                Experiencia laboral
-              </Typography>
-              <Box mt={6} sx={{ display: "grid", gap: 6 }}>
-                {experience.map((job, index) => (
-                  <Box key={index}>
-                    <Typography variant="h6" fontWeight="bold">
-                      {job.position}
-                    </Typography>
-                    <Typography variant="body1">
-                      {job.company} | {job.date}
-                    </Typography>
-                    <ul>
-                      {job.details.map((detail, idx) => (
-                        <li key={idx}>
-                          <CheckIcon sx={{ mr: 1 }} />
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
+                <Box sx={{ flex: 1 }}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      bgcolor: "#303b4a",
+                      py: 1,
+                      px: 3,
+                      borderRadius: "10px",
+                    }}
+                  >
+                    Certificaciones
+                  </Typography>
+                  <Typography variant="h3" fontWeight="bold" sx={{ mt: 2 }}>
+                    Certificaciones profesionales
+                  </Typography>
+                  <Box mt={6} sx={{ display: "grid", gap: 6 }}>
+                    {certifications.map((cert, index) => (
+                      <Box key={index}>
+                        <Typography variant="h6" fontWeight="bold">
+                          {cert.title}
+                        </Typography>
+                        <Typography variant="body1">
+                          {cert.organization} | Cursado {cert.date}
+                        </Typography>
+                        <Typography variant="body1" mt={2}>
+                          {cert.description}
+                        </Typography>
+                      </Box>
+                    ))}
                   </Box>
-                ))}
+                </Box>
               </Box>
-            </Box>
+            </Container>
           </Box>
-        </Container>
+        </Box>
       </Box>
-
       <Box py={12} sx={{ color: "#fff" }}>
         <Container maxWidth="lg">
           <Box
@@ -190,93 +299,7 @@ export default function About() {
             <Box sx={{ flex: 1 }}>
               <Typography
                 variant="subtitle1"
-                sx={{ bgcolor: "#f5f5f5", py: 1, px: 3, borderRadius: "10px" }}
-              >
-                Educación
-              </Typography>
-              <Typography variant="h3" fontWeight="bold" sx={{ mt: 2 }}>
-                Formación académica
-              </Typography>
-              <Box mt={6} sx={{ display: "grid", gap: 6 }}>
-                {education.map((edu, index) => (
-                  <Box key={index}>
-                    <Typography variant="h6" fontWeight="bold">
-                      {edu.degree}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      {edu.institution} | {edu.date}
-                    </Typography>
-                    <ul>
-                      {edu.details.map((detail, idx) => (
-                        <li key={idx}>
-                          <CheckIcon sx={{ mr: 1 }} />
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
-                  </Box>
-                ))}
-              </Box>
-            </Box>
-          </Box>
-        </Container>
-      </Box>
-
-      <Box py={12} sx={{ color: "#fff" }}>
-        <Container maxWidth="lg">
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 10,
-              color: "#fff",
-            }}
-          >
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="subtitle1"
-                sx={{ bgcolor: "#f5f5f5", py: 1, px: 3, borderRadius: "10px" }}
-              >
-                Certificaciones
-              </Typography>
-              <Typography variant="h3" fontWeight="bold" sx={{ mt: 2 }}>
-                Certificaciones profesionales
-              </Typography>
-              <Box mt={6} sx={{ display: "grid", gap: 6 }}>
-                {certifications.map((cert, index) => (
-                  <Box key={index}>
-                    <Typography variant="h6" fontWeight="bold">
-                      {cert.title}
-                    </Typography>
-                    <Typography variant="body1">
-                      {cert.organization} | Cursado {cert.date}
-                    </Typography>
-                    <Typography variant="body1" mt={2}>
-                      {cert.description}
-                    </Typography>
-                  </Box>
-                ))}
-              </Box>
-            </Box>
-          </Box>
-        </Container>
-      </Box>
-
-      <Box py={12} sx={{ color: "#fff" }}>
-        <Container maxWidth="lg">
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 10,
-            }}
-          >
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="subtitle1"
-                sx={{ bgcolor: "#f5f5f5", py: 1, px: 3, borderRadius: "10px" }}
+                sx={{ bgcolor: "#303b4a", py: 1, px: 3, borderRadius: "10px" }}
               >
                 Hobbies
               </Typography>
@@ -342,7 +365,7 @@ const skills = [
     icon: <BrushIcon color="#fff" fontSize="large" />,
     title: "Administración de Servidores",
     description:
-      "Experiencia en la administración de servidores, abarcando configuraciones, mantenimiento, y optimización para asegurar un rendimiento óptimo y una alta disponibilidad de servicios.",
+      "Experiencia abarcando configuraciones, mantenimiento, y optimización.",
   },
 ];
 
@@ -385,7 +408,7 @@ const experience = [
 
 const education = [
   {
-    degree: "Ing. Técnologias de la Información y Comunicación",
+    degree: "Ing. Tecnologías de la Información y Comunicación",
     institution: "CUT Universidad de Tijuana",
     date: "2023 - 2026",
     details: [
