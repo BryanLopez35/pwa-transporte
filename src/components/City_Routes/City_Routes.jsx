@@ -10,7 +10,7 @@ export default function CityRoutes() {
   const [selectedRoute, setSelectedRoute] = useState(null);
 
   useEffect(() => {
-    fetch("https://api-transporte-tijuana.onrender.com/api/routes")
+    fetch("/api/routes")
       .then((res) => res.json())
       .then((data) => {
         const allStops = data.reduce(
