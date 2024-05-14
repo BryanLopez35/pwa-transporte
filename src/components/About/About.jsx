@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  Typography,
-  Avatar,
-  Button,
-  Badge,
-  Box,
-  Container,
-} from "@mui/material";
+import { Typography, Avatar, Badge, Box, Container } from "@mui/material";
 import CodeIcon from "@mui/icons-material/Code";
 import BrushIcon from "@mui/icons-material/Brush";
 import BoltIcon from "@mui/icons-material/Bolt";
@@ -329,25 +321,25 @@ export default function About() {
 }
 const skills = [
   {
-    icon: <CodeIcon color="primary" fontSize="large" />,
+    icon: <CodeIcon color="#fff" fontSize="large" />,
     title: "Desarrollo Fullstack",
     description:
       "Experiencia en HTML, CSS, JavaScript, React.js, React Native, Bootstrap, PHP (CodeIgniter y Laravel), Node.js (Express), bases de datos SQL y APIs RESTful.",
   },
   {
-    icon: <BrushIcon color="primary" fontSize="large" />,
+    icon: <BrushIcon color="#fff" fontSize="large" />,
     title: "Bases de Datos",
     description:
       "Especializado en el diseño, desarrollo, administración y mantenimiento de sistemas de bases de datos.",
   },
   {
-    icon: <BoltIcon color="primary" fontSize="large" />,
+    icon: <BoltIcon color="#fff" fontSize="large" />,
     title: "Optimización de Rendiemiento",
     description:
       "Mejorar la velocidad del sitio web, optimizacón de assets e implementación las mejores prácticas.",
   },
   {
-    icon: <BrushIcon color="primary" fontSize="large" />,
+    icon: <BrushIcon color="#fff" fontSize="large" />,
     title: "Administración de Servidores",
     description:
       "Experiencia en la administración de servidores, abarcando configuraciones, mantenimiento, y optimización para asegurar un rendimiento óptimo y una alta disponibilidad de servicios.",
@@ -424,7 +416,7 @@ const hobbies = [
   {
     icon: <MyLocationIcon color="#fff" fontSize="large" />,
     title: "Airsoft",
-    description: "Practicar este demorte me mantiene motivado y activo",
+    description: "Practicar este deporte me mantiene motivado y activo",
   },
   {
     icon: <VideogameAssetIcon color="#fff" fontSize="large" />,
