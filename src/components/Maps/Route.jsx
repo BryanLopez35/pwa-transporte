@@ -1,25 +1,15 @@
 import React from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Polyline,
-  Marker,
-  Popup,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Polyline } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { Typography } from "@mui/material";
 
-export default function MapRoute({
-  mapRoutes,
-  routeName,
-  routeOrigin,
-  routeDestination,
-}) {
+export default function MapRoute({ mapRoutes, routeDetails }) {
   // Coordenadas aproximadas del centro de Tijuana
   const centerCoordinates = { lat: 32.4675, lng: -116.9138 };
 
   // Obtener la primera y última coordenada del array de rutas
-  const firstCoord = mapRoutes[0];
-  const lastCoord = mapRoutes[mapRoutes.length - 1];
+  //const firstCoord = mapRoutes[0];
+  //const lastCoord = mapRoutes[mapRoutes.length - 1];
 
   return (
     <MapContainer
@@ -37,6 +27,12 @@ export default function MapRoute({
         color="blue" // Puedes ajustar el color según tu preferencia
         weight={4} // Ancho de la línea en píxeles
       />
+      <div className="leaflet-top leaflet-right leaflet-control leaflet-bar map-legend">
+        <Typography>
+          Ruta {routeDetails.routeNumber}: {routeDetails.origin} -{" "}
+          {routeDetails.destination}
+        </Typography>
+      </div>
     </MapContainer>
   );
 }
