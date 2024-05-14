@@ -6,3 +6,5 @@ export { default as Footer } from "./Footer/Footer";
 export { default as Navbar } from "./Navbar/Navbar";
 export { default as PointsOfInterest } from "./PointsOfInterest";
 export { default as CityRoutes } from "./City_Routes/City_Routes";
+export { default as MapRoute } from "./Maps/Route";
+export { default as MapView } from "./Maps/MapView";

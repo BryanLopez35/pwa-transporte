@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, Typography, Container } from "@mui/material";
 import RouteCard from "../Card/RouteCard";
 import SearchRoutes from "./SearchRoutes";
+import { Link } from "react-router-dom";
 
 export default function CityRoutes() {
   const [routes, setRoutes] = useState([]);
@@ -10,7 +11,7 @@ export default function CityRoutes() {
   const [selectedRoute, setSelectedRoute] = useState(null);
 
   useEffect(() => {
-    fetch("https://api-transporte-tijuana.onrender.com/api/routes")
+    fetch("/routes")
       .then((res) => res.json())
       .then((data) => {
         const allStops = data.reduce(
@@ -76,19 +77,21 @@ export default function CityRoutes() {
         <Grid container spacing={2} justifyContent="center" maxWidth="lg">
           {filteredRoutes.map((route, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <RouteCard
-                routeNumber={route.routeNumber}
-                type={route.type}
-                concession={route.concession}
-                origin={route.origin}
-                destination={route.destination}
-                stops={route.stops}
-                mapRoute={route.mapRoute}
-                schedule={route.schedule}
-                img={route.img}
-                normalPrice={route.normalPrice}
-                preferredPrice={route.preferredPrice}
-              />
+              <Link to={`/mapa/${route.routeNumber}`}>
+                <RouteCard
+                  routeNumber={route.routeNumber}
+                  type={route.type}
+                  concession={route.concession}
+                  origin={route.origin}
+                  destination={route.destination}
+                  stops={route.stops}
+                  mapRoute={route.mapRoute}
+                  schedule={route.schedule}
+                  img={route.img}
+                  normalPrice={route.normalPrice}
+                  preferredPrice={route.preferredPrice}
+                />
+              </Link>
             </Grid>
           ))}
         </Grid>
