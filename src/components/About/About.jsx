@@ -35,7 +35,7 @@ export default function About() {
             <Box sx={{ flex: 1 }}>
               <Typography
                 variant="subtitle1"
-                sx={{ bgcolor: "#303b4a", py: 1, px: 3, borderRadius: "10px" }}
+                sx={{ bgcolor: "#303b4a", py: 1, px: 3, borderRadius: "10px" , color:"#fff"}}
               >
                 Sobre mi
               </Typography>
