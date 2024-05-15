@@ -58,6 +58,24 @@
   color: #4a637f;
 }
 
+.rating-container {
+  display: flex;
+  justify-content: center;
+  gap: 4em;
+  color: #161b22;
+}
+
+.rating-container .value {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #161b22;
+}
+
+.rating-container .label {
+  font-size: 1em;
+  color: #4a637f;
+}
+
 .card-btn {
   border: none;
   font-size: 1rem;
