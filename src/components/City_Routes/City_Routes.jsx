@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Typography, Container } from "@mui/material";
+import { Grid, Typography, Container, Box } from "@mui/material";
 import RouteCard from "../Card/RouteCard";
 import SearchRoutes from "./SearchRoutes";
 import { Link } from "react-router-dom";
@@ -51,50 +51,71 @@ export default function CityRoutes() {
         backgroundColor: "#161b22",
       }}
     >
-      <Container
-        component="main"
-        maxWidth="lg"
-        style={{ margin: "122px auto" }}
-      >
-        <Typography
-          variant="h4"
-          component="h1"
-          gutterBottom
-          style={{
-            color: "#fff",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "center",
-            position: "relative",
-            marginBottom: "26px",
-          }}
-        >
-          <span style={{ fontWeight: "bold" }}>Rutas</span>
-        </Typography>
-        <SearchRoutes stops={stops} routes={routes} onSearch={handleSearch} />
-        <Grid container spacing={2} justifyContent="center" maxWidth="lg">
-          {filteredRoutes.map((route, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Link to={`/mapa/${route.routeNumber}`}>
-                <RouteCard
-                  routeNumber={route.routeNumber}
-                  type={route.type}
-                  concession={route.concession}
-                  origin={route.origin}
-                  destination={route.destination}
-                  stops={route.stops}
-                  mapRoute={route.mapRoute}
-                  schedule={route.schedule}
-                  img={route.img}
-                  normalPrice={route.normalPrice}
-                  preferredPrice={route.preferredPrice}
+      <Container component="main" maxWidth="lg">
+        {/* Sección de Rutas */}
+        <Box py={4} sx={{ color: "#fff" }}>
+          <Container maxWidth="lg">
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 10,
+              }}
+            >
+              <Box sx={{ flex: 1 }}>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    bgcolor: "#303b4a",
+                    py: 1,
+                    px: 3,
+                    borderRadius: "10px",
+                  }}
+                >
+                  Rutas
+                </Typography>
+
+                <SearchRoutes
+                  stops={stops}
+                  routes={routes}
+                  onSearch={handleSearch}
                 />
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
+                <Box
+                  mt={6}
+                  sx={{
+                    display: "grid",
+                    gridTemplateColumns: {
+                      xs: "1fr",
+                      sm: "repeat(2, 1fr)",
+                      md: "repeat(3, 1fr)",
+                    },
+                    gap: 4,
+                    color: "#ff",
+                  }}
+                >
+                  {filteredRoutes.map((route, index) => (
+                    <Grid item xs={12} sm={6} md={4} key={index}>
+                      <Link to={`/mapa/${route.routeNumber}`}>
+                        <RouteCard
+                          routeNumber={route.routeNumber}
+                          type={route.type}
+                          concession={route.concession}
+                          origin={route.origin}
+                          destination={route.destination}
+                          schedule={route.schedule}
+                          img={route.img}
+                          normalPrice={route.normalPrice}
+                          preferredPrice={route.preferredPrice}
+                        />
+                      </Link>
+                    </Grid>
+                  ))}
+                </Box>
+              </Box>
+            </Box>
+          </Container>
+        </Box>
       </Container>
     </div>
   );

@@ -11,8 +11,8 @@ export default function SearchRoutes({ stops, routes, onSearch }) {
 
   return (
     <Autocomplete
-      style={{ marginBottom: "26px" }}
       id="search-route-input"
+      sx={{ mt: 2 }}
       freeSolo
       options={stops}
       onChange={handleRouteChange}

@@ -21,6 +21,7 @@
     "leaflet": "^1.9.4",
     "react": "^18.3.1",
     "react-card-slider-component": "^1.0.9",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.3.1",
     "react-leaflet": "^4.2.1",
     "react-material-ui-carousel": "^3.4.2",
