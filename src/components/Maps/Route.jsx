@@ -1,6 +1,11 @@
-import React, { useState } from "react";
-import { MapContainer, TileLayer, Polyline } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import React, { useState, useEffect } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Polyline,
+  Marker,
+  Popup,
+} from "react-leaflet";
 import { Typography, SwipeableDrawer } from "@mui/material";
 import { isMobileOnly } from "react-device-detect";
 import RouteInfoCard from "../Card/RouteInfoCard";
@@ -24,9 +29,23 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 export default function MapRoute({ mapRoutes, routeDetails }) {
   const centerCoordinates = { lat: 32.4675, lng: -116.9138 };
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
 
   const handleToggleDrawer = () => setDrawerOpen(!drawerOpen);
   const handleCloseDrawer = () => setDrawerOpen(false);
+
+  // Obtener la ubicación del usuario al cargar el componente
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setUserLocation({ lat: latitude, lng: longitude });
+      },
+      (error) => {
+        console.error("Error getting user location:", error);
+      }
+    );
+  }, []);
 
   // Calcular la distancia total de la ruta
   const totalDistance = mapRoutes
@@ -43,9 +62,9 @@ export default function MapRoute({ mapRoutes, routeDetails }) {
   return (
     <>
       <MapContainer
-        center={centerCoordinates}
+        center={userLocation || centerCoordinates} // Utilizar la ubicación del usuario si está disponible, de lo contrario, usar coordenadas predeterminadas
         scrollWheelZoom={false}
-        zoom={11.8}
+        zoom={10.5}
         style={{ width: "100%", height: "calc(100vh - 5rem)" }}
         attributionControl={false}
       >
@@ -53,6 +72,28 @@ export default function MapRoute({ mapRoutes, routeDetails }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {userLocation && (
+          <Marker position={userLocation}>
+            <Popup>Tu ubicación</Popup>
+          </Marker>
+        )}
+        {/* Mostrar el inicio de la ruta */}
+        {mapRoutes.length > 0 && (
+          <Marker position={[mapRoutes[0].lat, mapRoutes[0].lon]}>
+            <Popup>Inicio del Circuito</Popup>
+          </Marker>
+        )}
+        {/* Mostrar el fin de la ruta */}
+        {mapRoutes.length > 0 && (
+          <Marker
+            position={[
+              mapRoutes[mapRoutes.length - 1].lat,
+              mapRoutes[mapRoutes.length - 1].lon,
+            ]}
+          >
+            <Popup>Fin del Circuito</Popup>
+          </Marker>
+        )}
         <Polyline
           positions={mapRoutes.map((coord) => [coord.lat, coord.lon])}
           color="blue"
