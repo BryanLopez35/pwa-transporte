@@ -8,12 +8,9 @@ import { KeyboardArrowUp, Close } from "@mui/icons-material";
 export default function MapRoute({ mapRoutes, routeDetails }) {
   const centerCoordinates = { lat: 32.4675, lng: -116.9138 };
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [tabOpen, setTabOpen] = useState(true);
 
-  const handleOpenDrawer = () => setDrawerOpen(true);
+  const handleToggleDrawer = () => setDrawerOpen(!drawerOpen);
   const handleCloseDrawer = () => setDrawerOpen(false);
-
-  const handleToggleTab = () => setTabOpen(!tabOpen);
 
   return (
     <>
@@ -48,16 +45,15 @@ export default function MapRoute({ mapRoutes, routeDetails }) {
               bottom: 0,
               left: 0,
               right: 0,
-              height: tabOpen ? "40px" : "60px",
+              height: drawerOpen ? "40px" : "60px",
               backgroundColor: "#ffffff",
               borderTop: "1px solid #ccc",
               cursor: "pointer",
               zIndex: 1000,
             }}
-            onClick={handleToggleTab}
+            onClick={handleToggleDrawer}
           >
-            <Typography
-              variant="body2"
+            <div
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -65,18 +61,20 @@ export default function MapRoute({ mapRoutes, routeDetails }) {
                 height: "100%",
               }}
             >
-              {tabOpen ? "Desliza hacia arriba" : "Ver más información"}
-              <KeyboardArrowUp
-                style={{ transform: `rotate(${tabOpen ? "180deg" : "0deg"})` }}
-              />
-            </Typography>
+              <Typography variant="body2">
+                Ver más información
+                <KeyboardArrowUp
+                  style={{ transform: `rotate(${drawerOpen ? "180deg" : "0deg"})` }}
+                />
+              </Typography>
+            </div>
           </div>
           {/* SwipeableDrawer */}
           <SwipeableDrawer
             anchor="bottom"
             open={drawerOpen}
             onClose={handleCloseDrawer}
-            onOpen={handleOpenDrawer}
+            onOpen={handleToggleDrawer}
             style={{ zIndex: 999 }}
           >
             <div style={{ padding: "1rem" }}>
@@ -89,9 +87,14 @@ export default function MapRoute({ mapRoutes, routeDetails }) {
               <Typography variant="h5">
                 Información adicional de la ruta
               </Typography>
-              <Typography>Ruta {routeDetails.routeNumber}</Typography>
-              <Typography>
-                Origen: {routeDetails.origin} - Destino: {routeDetails.destination}
+              <Typography variant="body1">
+                Ruta: {routeDetails.routeNumber}
+              </Typography>
+              <Typography variant="body1">
+                Origen: {routeDetails.origin}
+              </Typography>
+              <Typography variant="body1">
+                Destino: {routeDetails.destination}
               </Typography>
             </div>
           </SwipeableDrawer>
