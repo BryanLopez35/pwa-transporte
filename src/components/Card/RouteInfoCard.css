@@ -1,0 +1,87 @@
+.job-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2em;
+  box-shadow: #091e4240 0px 1px 1px, #091e4221 0px 0px 1px 1px;
+  border-radius: 0.6em;
+  padding: 1em;
+  max-width: 30em;
+}
+
+.text-title {
+  display: flex;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 1.5em;
+  font-weight: 600;
+  font-family: "Noto Sans", sans-serif;
+  color: #161b22;
+}
+
+.tittle-container {
+  display: flex;
+  gap: 1em;
+  color: #161b22;
+}
+
+.text-body {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.4px;
+  color: #161b22;
+  font-size: 1.2em;
+}
+
+.post-date {
+  color: #4a637f;
+}
+
+.budget-exp {
+  display: flex;
+  gap: 4em;
+  color: #161b22;
+}
+
+.budget-exp .value {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #161b22;
+}
+
+.budget-exp .label {
+  font-size: 1em;
+  color: #4a637f;
+}
+
+.card-btn {
+  border: none;
+  font-size: 1rem;
+  background-color: #5e7c99;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 2em;
+  padding: 0.6em 1em;
+}
+
+.card-btn:hover {
+  background-color: #4a637f;
+}
+
+.tags article {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+}
+
+.tags p {
+  border-radius: 1.2em;
+  padding: 0.2em 0.5em;
+  background-color: #f2f7f2;
+  color: #598551;
+}

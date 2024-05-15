@@ -17,6 +17,9 @@ export default function MapView() {
           routeNumber: data.routeNumber,
           origin: data.origin,
           destination: data.destination,
+          normalPrice: data.normalPrice,
+          preferredPrice: data.preferredPrice,
+          schedule: data.schedule,
         });
       })
       .catch((error) => console.error("Error fetching map route:", error));
