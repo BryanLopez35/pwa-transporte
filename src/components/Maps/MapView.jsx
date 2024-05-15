@@ -9,7 +9,7 @@ export default function MapView() {
   const [routeDetails, setRouteDetails] = useState({});
 
   useEffect(() => {
-    fetch(`/routes/${routeId}`)
+    fetch(`https://api-transporte-tijuana.onrender.com/api/routes/${routeId}`)
       .then((res) => res.json())
       .then((data) => {
         setMapRoute(data.mapRoute);
