@@ -21,10 +21,10 @@ export default function Find() {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [originCoordinates, setOriginCoordinates] = useState(null);
   const [destinationCoordinates, setDestinationCoordinates] = useState(null);
+  const [destinationSearchOptions, setDestinationSearchOptions] = useState([]);
 
   let searchTimeout;
-
-  const handleAddressSearch = async (inputValue) => {
+  const handleAddressSearch = async (inputValue, field) => {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
       const provider = new OpenStreetMapProvider({
@@ -32,16 +32,38 @@ export default function Find() {
           "accept-language": "es",
           countrycodes: "mx",
           addressdetails: 1,
+          viewbox: "-117.18,32.38,-116.70,32.58",
         },
       });
       const results = await provider.search({ query: inputValue });
-      setSearchOptions(results.map((result) => result.label));
-      // Almacenar coordenadas de destino
-      setDestinationCoordinates(
-        results[0]?.x && results[0]?.y
-          ? { lat: results[0].y, lng: results[0].x }
-          : null
+      const filteredResults = results.filter((result) =>
+        ["Tijuana", "Playas de Tijuana", "Rosarito", "Tecate"].some((area) =>
+          result.label.includes(area)
+        )
       );
+      if (field === "origin") {
+        setSearchOptions(filteredResults.map((result) => result.label));
+        if (filteredResults.length > 0) {
+          setOriginCoordinates({
+            lat: filteredResults[0].y,
+            lng: filteredResults[0].x,
+          });
+        } else {
+          setOriginCoordinates(null);
+        }
+      } else if (field === "destination") {
+        setDestinationSearchOptions(
+          filteredResults.map((result) => result.label)
+        );
+        if (filteredResults.length > 0) {
+          setDestinationCoordinates({
+            lat: filteredResults[0].y,
+            lng: filteredResults[0].x,
+          });
+        } else {
+          setDestinationCoordinates(null);
+        }
+      }
     }, 300);
   };
 
@@ -82,6 +104,32 @@ export default function Find() {
     }
   };
 
+  const handleAddressSelect = (selectedAddress) => {
+    setSelectedAddress(selectedAddress);
+    // Obtener coordenadas de la dirección seleccionada
+    const provider = new OpenStreetMapProvider({
+      params: {
+        "accept-language": "es",
+        countrycodes: "mx",
+        addressdetails: 1,
+        viewbox: "-117.18,32.38,-116.70,32.58", // Coordenadas del área de Tijuana, Playas de Tijuana, Rosarito y Tecate
+      },
+    });
+    provider.search({ query: selectedAddress }).then((results) => {
+      if (results.length > 0) {
+        // Actualizar las coordenadas y la dirección del origen al seleccionar una dirección
+        setOriginCoordinates({
+          lat: results[0].y,
+          lng: results[0].x,
+        });
+        setUserAddress(selectedAddress); // Actualizar la dirección del usuario
+      } else {
+        setOriginCoordinates(null); // No se encontraron resultados válidos
+        setUserAddress(""); // Reiniciar la dirección del usuario
+      }
+    });
+  };
+
   const [index, set] = useState(0);
 
   useTransition(index, {
@@ -113,6 +161,38 @@ export default function Find() {
       );
     }
   };
+  // Función para manejar la búsqueda de direcciones en el campo de destino
+  const handleDestinationSearch = async (inputValue) => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(async () => {
+      const provider = new OpenStreetMapProvider({
+        params: {
+          "accept-language": "es",
+          countrycodes: "mx",
+          addressdetails: 1,
+          viewbox: "-117.18,32.38,-116.70,32.58",
+        },
+      });
+      const results = await provider.search({ query: inputValue });
+      const filteredResults = results.filter((result) =>
+        ["Tijuana", "Playas de Tijuana", "Rosarito", "Tecate"].some((area) =>
+          result.label.includes(area)
+        )
+      );
+      setDestinationSearchOptions(
+        filteredResults.map((result) => result.label)
+      );
+      if (filteredResults.length > 0) {
+        setDestinationCoordinates({
+          lat: filteredResults[0].y,
+          lng: filteredResults[0].x,
+        });
+      } else {
+        setDestinationCoordinates(null);
+      }
+    }, 300);
+  };
+
   return (
     <>
       {/* Contenedor de la sección del formulario */}
@@ -211,9 +291,11 @@ export default function Find() {
                     freeSolo
                     options={searchOptions}
                     value={userAddress}
-                    onChange={(event, newValue) => setUserAddress(newValue)}
+                    onChange={(event, newValue) =>
+                      handleAddressSelect(newValue)
+                    }
                     onInputChange={(event, newInputValue) =>
-                      handleAddressSearch(newInputValue)
+                      handleAddressSearch(newInputValue, "origin")
                     }
                     renderInput={(params) => (
                       <TextField
@@ -272,11 +354,11 @@ export default function Find() {
                   <Autocomplete
                     id="search-address-input"
                     freeSolo
-                    options={searchOptions}
+                    options={destinationSearchOptions}
                     value={selectedAddress}
                     onChange={(event, newValue) => setSelectedAddress(newValue)}
                     onInputChange={(event, newInputValue) =>
-                      handleAddressSearch(newInputValue)
+                      handleDestinationSearch(newInputValue)
                     }
                     renderInput={(params) => (
                       <TextField
