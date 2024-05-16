@@ -305,14 +305,13 @@ export default function About() {
                           <Typography variant="body1">
                             {job.company} | {job.date}
                           </Typography>
-                          <ul>
-                            {job.details.map((detail, idx) => (
-                              <li key={idx}>
-                                <CheckIcon sx={{ mr: 1 }} />
-                                {detail}
-                              </li>
-                            ))}
-                          </ul>
+
+                          {job.details.map((detail, idx) => (
+                            <div key={idx}>
+                              <CheckIcon sx={{ mr: 1 }} />
+                              {detail}
+                            </div>
+                          ))}
                         </Box>
                       ))}
                     </Box>

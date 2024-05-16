@@ -5,6 +5,8 @@ import { useTransition } from "@react-spring/web";
 import IconButton from "@mui/material/IconButton";
 import { Room } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
+import { OpenStreetMapProvider } from "leaflet-geosearch";
 
 const images = [
   "https://cdn-3.expansion.mx/dims4/default/82048d0/2147483647/strip/true/crop/2107x1423+0+0/resize/1200x810!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F34%2F11ce48a3419c8f0f7f8ccc772ef0%2Fistock-880471902.jpg",
@@ -15,12 +17,42 @@ const images = [
 export default function Find() {
   const [fetchingLocation, setFetchingLocation] = useState(false);
   const [userAddress, setUserAddress] = useState("");
+  const [searchOptions, setSearchOptions] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [originCoordinates, setOriginCoordinates] = useState(null);
+  const [destinationCoordinates, setDestinationCoordinates] = useState(null);
+
+  let searchTimeout;
+
+  const handleAddressSearch = async (inputValue) => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(async () => {
+      const provider = new OpenStreetMapProvider({
+        params: {
+          "accept-language": "es",
+          countrycodes: "mx",
+          addressdetails: 1,
+        },
+      });
+      const results = await provider.search({ query: inputValue });
+      setSearchOptions(results.map((result) => result.label));
+      // Almacenar coordenadas de destino
+      setDestinationCoordinates(
+        results[0]?.x && results[0]?.y
+          ? { lat: results[0].y, lng: results[0].x }
+          : null
+      );
+    }, 300);
+  };
+
   const getUserLocation = () => {
     if (navigator.geolocation) {
       setFetchingLocation(true);
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
+          // Almacenar coordenadas de origen
+          setOriginCoordinates({ lat: latitude, lng: longitude });
           try {
             const response = await fetch(
               `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`
@@ -51,6 +83,7 @@ export default function Find() {
   };
 
   const [index, set] = useState(0);
+
   useTransition(index, {
     key: index,
     from: { opacity: 0 },
@@ -65,6 +98,21 @@ export default function Find() {
     exitBeforeEnter: true,
   });
 
+  const handleSubmit = () => {
+    // Verificar si se han obtenido las coordenadas de origen y destino
+    if (originCoordinates && destinationCoordinates) {
+      // Crear una cadena de texto con las coordenadas
+      const coordinatesMessage = `Coordenadas de origen: ${JSON.stringify(
+        originCoordinates
+      )}, Coordenadas de destino: ${JSON.stringify(destinationCoordinates)}`;
+      // Mostrar las coordenadas en un alert
+      alert(coordinatesMessage);
+    } else {
+      alert(
+        "Por favor selecciona direcciones válidas antes de encontrar rutas."
+      );
+    }
+  };
   return (
     <>
       {/* Contenedor de la sección del formulario */}
@@ -125,7 +173,9 @@ export default function Find() {
               }}
             >
               Explora tu ciudad, Muévete por{" "}
-              <span style={{ fontWeight: "bold" , color:"#d3dbe4"}}>Tijuana</span>
+              <span style={{ fontWeight: "bold", color: "#d3dbe4" }}>
+                Tijuana
+              </span>
             </Typography>
           </div>
 
@@ -156,95 +206,109 @@ export default function Find() {
             >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="origin"
-                    label="Origen"
-                    name="origin"
+                  <Autocomplete
+                    id="origin-address-input"
+                    freeSolo
+                    options={searchOptions}
                     value={userAddress}
-                    onChange={(e) => setUserAddress(e.target.value)}
-                    sx={{
-                      input: { color: "white" },
-                      "& .MuiInputLabel-root": {
-                        color: "#354557", // Cambia el color de la etiqueta
-                      },
-                      "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#fff", // Cambia el color de la etiqueta cuando está enfocada
-                      },
-                      "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "#354557", // Cambia el color del borde del TextField
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "#4a637f", // Cambia el color del borde al pasar el cursor
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "#4a637f", // Cambia el color del borde cuando está enfocado
-                        },
-                      },
-                    }}
-                    placeholder="Ingresa el punto de inicio"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="Obtener ubicación"
-                            edge="end"
-                            onClick={getUserLocation}
-                            disabled={fetchingLocation} // Deshabilitar el botón mientras se obtiene la ubicación
-                          >
-                            {fetchingLocation ? (
-                              <CircularProgress size={24} />
-                            ) : (
-                              <Room style={{ color: "white" }} />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                      startAdornment: (
-                        <InputAdornment position="start"></InputAdornment>
-                      ),
-                    }}
+                    onChange={(event, newValue) => setUserAddress(newValue)}
+                    onInputChange={(event, newInputValue) =>
+                      handleAddressSearch(newInputValue)
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Origen"
+                        margin="normal"
+                        InputProps={{
+                          ...params.InputProps,
+                          type: "search",
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                aria-label="Obtener ubicación"
+                                edge="end"
+                                onClick={getUserLocation}
+                                disabled={fetchingLocation}
+                              >
+                                {fetchingLocation ? (
+                                  <CircularProgress size={24} />
+                                ) : (
+                                  <Room style={{ color: "white" }} />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                          startAdornment: (
+                            <InputAdornment position="start"></InputAdornment>
+                          ),
+                        }}
+                        sx={{
+                          input: { color: "white" },
+                          "& .MuiInputLabel-root": {
+                            color: "#354557",
+                          },
+                          "& .MuiInputLabel-root.Mui-focused": {
+                            color: "#fff",
+                          },
+                          "& .MuiOutlinedInput-root": {
+                            "& fieldset": {
+                              borderColor: "#354557",
+                            },
+                            "&:hover fieldset": {
+                              borderColor: "#4a637f",
+                            },
+                            "&.Mui-focused fieldset": {
+                              borderColor: "#4a637f",
+                            },
+                          },
+                        }}
+                      />
+                    )}
                   />
                 </Grid>
+
                 <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="destination"
-                    label="Destino"
-                    name="destination"
-                    placeholder="Ingresa tu destino"
-                    sx={{
-                      input: { color: "white" },
-                      "& .MuiInputLabel-root": {
-                        color: "#354557", // Cambia el color de la etiqueta
-                      },
-                      "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#fff", // Cambia el color de la etiqueta cuando está enfocada
-                      },
-                      "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "#354557", // Cambia el color del borde del TextField
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "#4a637f", // Cambia el color del borde al pasar el cursor
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "#4a637f", // Cambia el color del borde cuando está enfocado
-                        },
-                      },
-                    }}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start"></InputAdornment>
-                      ),
-                    }}
+                  <Autocomplete
+                    id="search-address-input"
+                    freeSolo
+                    options={searchOptions}
+                    value={selectedAddress}
+                    onChange={(event, newValue) => setSelectedAddress(newValue)}
+                    onInputChange={(event, newInputValue) =>
+                      handleAddressSearch(newInputValue)
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Buscar dirección"
+                        margin="normal"
+                        InputProps={{
+                          ...params.InputProps,
+                          type: "search",
+                        }}
+                        sx={{
+                          input: { color: "white" },
+                          "& .MuiInputLabel-root": {
+                            color: "#354557", // Cambia el color de la etiqueta
+                          },
+                          "& .MuiInputLabel-root.Mui-focused": {
+                            color: "#fff", // Cambia el color de la etiqueta cuando está enfocada
+                          },
+                          "& .MuiOutlinedInput-root": {
+                            "& fieldset": {
+                              borderColor: "#354557", // Cambia el color del borde del TextField
+                            },
+                            "&:hover fieldset": {
+                              borderColor: "#4a637f", // Cambia el color del borde al pasar el cursor
+                            },
+                            "&.Mui-focused fieldset": {
+                              borderColor: "#4a637f", // Cambia el color del borde cuando está enfocado
+                            },
+                          },
+                        }}
+                      />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -262,7 +326,7 @@ export default function Find() {
                       },
                       height: "40px",
                     }}
-                    onClick={() => alert("Botón presionado")}
+                    onClick={handleSubmit} // Llama a la función handleSubmit al hacer clic
                   >
                     Encontrar Rutas
                   </Button>
