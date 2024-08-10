@@ -8,3 +8,5 @@ export { default as PointsOfInterest } from "./PointsOfInterest";
 export { default as CityRoutes } from "./City_Routes/City_Routes";
 export { default as MapRoute } from "./Maps/Route";
 export { default as MapView } from "./Maps/MapView";
+export { default as Login } from "./Admin/Login";
+export { default as Dashboard } from "./Admin/Dashboard";

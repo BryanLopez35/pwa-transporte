@@ -123,6 +123,11 @@ export default function Footer() {
                       <p>Cookies</p>
                     </div>
                   </a>
+                  <a href="/login">
+                    <div>
+                      <p>Iniciar Sesión</p>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>

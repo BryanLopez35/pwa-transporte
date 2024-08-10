@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,17 +13,18 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "@mui/material";
 import Logo from "./logo.png";
 
-const pages = [
-  { title: "Inicio", link: "/" },
-  { title: "Rutas", link: "/rutas" },
-  { title: "Puntos de Interes", link: "/puntos-de-interes" },
-  { title: "Galería", link: "/galeria" },
-  { title: "Sobre", link: "/acerca" },
-];
-
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Verificar si el usuario está autenticado
+    const auth = JSON.parse(localStorage.getItem("auth"));
+    if (auth && new Date().getTime() < auth.expirationTime) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,16 +34,19 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
-  const [isReadyForInstall, setIsReadyForInstall] = React.useState(false);
+  const handleLogout = () => {
+    localStorage.removeItem("auth"); // Eliminar autenticación de localStorage
+    setIsAuthenticated(false);
+    navigate("/login"); // Redirigir al usuario a la página de login
+  };
+
+  const [isReadyForInstall, setIsReadyForInstall] = useState(false);
 
   useEffect(() => {
     window.addEventListener("beforeinstallprompt", (event) => {
-      // Prevent the mini-infobar from appearing on mobile.
       event.preventDefault();
       console.log("👍", "beforeinstallprompt", event);
-      // Stash the event so it can be triggered later.
       window.deferredPrompt = event;
-      // Remove the 'hidden' class from the install button container.
       setIsReadyForInstall(true);
     });
   }, []);
@@ -51,21 +55,29 @@ function ResponsiveAppBar() {
     console.log("👍", "butInstall-clicked");
     const promptEvent = window.deferredPrompt;
     if (!promptEvent) {
-      // The deferred prompt isn't available.
       console.log("oops, no prompt event guardado en window");
       return;
     }
-    // Show the install prompt.
     promptEvent.prompt();
-    // Log the result
     const result = await promptEvent.userChoice;
     console.log("👍", "userChoice", result);
-    // Reset the deferred prompt variable, since
-    // prompt() can only be called once.
     window.deferredPrompt = null;
-    // Hide the install button.
     setIsReadyForInstall(false);
   }
+
+  // Agregar la opción "Cerrar Sesión" al final del menú si el usuario está autenticado
+  const pages = [
+    { title: "Inicio", link: "/" },
+    { title: "Rutas", link: "/rutas" },
+    { title: "Puntos de Interes", link: "/puntos-de-interes" },
+    { title: "Galería", link: "/galeria" },
+    { title: "Sobre", link: "/acerca" },
+  ];
+
+  if (isAuthenticated) {
+    pages.push({ title: "Cerrar Sesión", action: handleLogout });
+  }
+
   return (
     <AppBar position="static" sx={{ backgroundColor: "#05141a" }}>
       <Container maxWidth="xl">
@@ -121,9 +133,13 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem
-                  key={page.link}
+                  key={page.title}
                   onClick={() => {
-                    navigate(page.link);
+                    if (page.link) {
+                      navigate(page.link);
+                    } else if (page.action) {
+                      page.action();
+                    }
                     handleCloseNavMenu();
                   }}
                 >
@@ -155,9 +171,13 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page.link}
+                key={page.title}
                 onClick={() => {
-                  navigate(page.link);
+                  if (page.link) {
+                    navigate(page.link);
+                  } else if (page.action) {
+                    page.action();
+                  }
                   handleCloseNavMenu();
                 }}
                 sx={{ my: 2, color: "white", display: "block" }}
@@ -166,6 +186,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
+
           {isReadyForInstall && (
             <Button
               variant="contained"
@@ -188,4 +209,5 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;

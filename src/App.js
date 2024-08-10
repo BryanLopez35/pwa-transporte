@@ -6,6 +6,8 @@ import {
   PointsOfInterest,
   CityRoutes,
   MapView,
+  Login,
+  Dashboard
 } from "./components";
 import { Routes, Route } from "react-router-dom";
 
@@ -20,7 +22,8 @@ function App() {
         <Route path="puntos-de-interes" element={<PointsOfInterest />} />
         <Route path="rutas" element={<CityRoutes />} />
         <Route path="/mapa/:routeId" element={<MapView />} />
-
+        <Route path="login" element={<Login />} />
+        <Route path="dashboard" element={<Dashboard />} />
       </Routes>
     </Layout>
   );
