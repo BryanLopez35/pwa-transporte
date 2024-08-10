@@ -20,19 +20,6 @@ import EditRouteModal from "./EditRouteModal";
 
 export default function Dashboard() {
   const [routes, setRoutes] = useState([]);
-  const [newRoute, setNewRoute] = useState({
-    routeNumber: "",
-    type: "",
-    concession: "",
-    origin: "",
-    destination: "",
-    stops: "",
-    mapRoute: "",
-    schedule: "",
-    normalPrice: "",
-    preferredPrice: "",
-    img: "",
-  });
   const [editingRoute, setEditingRoute] = useState(null);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
