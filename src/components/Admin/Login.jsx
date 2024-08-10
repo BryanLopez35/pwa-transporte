@@ -37,7 +37,7 @@ export default function Login() {
         const expirationTime = new Date().getTime() + 60 * 60 * 1000; // Expira en 1 hora
         localStorage.setItem("auth", JSON.stringify({ username, expirationTime }));
 
-        navigate("/acerca"); // Redirigir a la página principal después del login exitoso
+        navigate("/dashboard"); // Redirigir a la página principal después del login exitoso
       } else {
         console.log("Login failed, status code:", response.status); // Depuración: Fallo en el inicio de sesión
         setError("Credenciales incorrectas");

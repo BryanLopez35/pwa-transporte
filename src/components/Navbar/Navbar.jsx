@@ -76,6 +76,8 @@ function ResponsiveAppBar() {
 
   if (isAuthenticated) {
     pages.push({ title: "Cerrar Sesión", action: handleLogout });
+    pages.push({ title: "Dashboard", link: "/dashboard" });
+
   }
 
   return (
